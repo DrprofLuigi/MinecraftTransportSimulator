@@ -100,8 +100,10 @@ public abstract class EntityVehicleA_Base extends Entity{
 		parts.add(part);
 		if(!ignoreCollision){
 			//Check for collision, and boost if needed.
+			//Reduced the boost. When adding -part.offset.y, vehicles with parts far from the axis (planes with long landing gear) get launched in the air and break.
+			//Only boosting by part height makes sense, because you can't place a part that's underground!
 			if(part.isPartCollidingWithBlocks(Vec3d.ZERO)){
-				this.setPositionAndRotation(posX, posY +  Math.max(0, -part.offset.y) + part.getHeight(), posZ, rotationYaw, rotationPitch);
+				this.setPositionAndRotation(posX, posY +  /*Math.max(0, -part.offset.y) +*/ part.getHeight(), posZ, rotationYaw, rotationPitch);
 			}
 			
 			//Sometimes we need to do this for parts that are deeper into the ground.
